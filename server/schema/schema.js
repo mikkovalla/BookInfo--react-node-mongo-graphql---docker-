@@ -1,4 +1,12 @@
+//demo dataa...
+const books = [
+    { name: 'Lord of the rings 1', genre: 'Fantasy', id:'1'},
+    { name: 'Lord of the rings 2', genre: 'Fantasy', id:'2'},
+    { name: 'Lord of the rings 3', genre: 'Thriller', id:'3'}
+]
+
 const graphql = require("graphql")
+const _ = require('lodash')
 
 const { GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql
 
@@ -22,6 +30,7 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args){
                 //get data from db
+                return _.find(books, { id: args.id })
             }
 
         }
