@@ -16,6 +16,24 @@ const books = [{
         genre: 'Thriller',
         id: '3',
         authorId: '3'
+    },
+    {
+        name: 'Lord of the rings 5',
+        genre: 'Thriller',
+        id: '4',
+        authorId: '3'
+    },
+    {
+        name: 'Lord of the rings 7',
+        genre: 'Thriller',
+        id: '5',
+        authorId: '1'
+    },
+    {
+        name: 'Lord of the rings 0',
+        genre: 'Thriller',
+        id: '6',
+        authorId: '1'
     }
 ]
 
@@ -44,7 +62,8 @@ const {
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 } = graphql
 
 const BookType = new GraphQLObjectType({
@@ -82,6 +101,14 @@ const AuthorType = new GraphQLObjectType({
         },
         age: {
             type: GraphQLInt
+        },
+        books: {
+            type: GraphQLList(BookType),
+            resolve(parent, args) {
+                return _.filter(books, {
+                    authorId: parent.id
+                })
+            }
         }
     })
 })
