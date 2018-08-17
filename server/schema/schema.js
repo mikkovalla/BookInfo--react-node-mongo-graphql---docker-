@@ -16,6 +16,23 @@ const books = [{
     }
 ]
 
+const authors = [{
+    name: 'JJ Tolkien',
+    age: 70,
+    id: '1'
+},
+{
+    name: 'JJ Tolkien Jr',
+    age: 50,
+    id: '2'
+},
+{
+    name: 'JJ Tolkien Sr',
+    age: 80,
+    id: '3'
+}
+]
+
 const graphql = require("graphql")
 const _ = require('lodash')
 
@@ -23,7 +40,8 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
-    GraphQLID
+    GraphQLID,
+    GraphQLInt
 } = graphql
 
 const BookType = new GraphQLObjectType({
@@ -41,6 +59,21 @@ const BookType = new GraphQLObjectType({
     })
 })
 
+const AuthorType = new GraphQLObjectType({
+    name: 'Author',
+    fields: () => ({
+        id: {
+            type: GraphQLID
+        },
+        name: {
+            type: GraphQLString
+        },
+        age: {
+            type: GraphQLInt
+        }
+    })
+})
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -52,7 +85,7 @@ const RootQuery = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                //get data from db
+                //get data from db with lodash
                 return _.find(books, {
                     id: args.id
                 })
