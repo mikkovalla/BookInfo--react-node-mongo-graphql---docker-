@@ -17,20 +17,20 @@ const books = [{
 ]
 
 const authors = [{
-    name: 'JJ Tolkien',
-    age: 70,
-    id: '1'
-},
-{
-    name: 'JJ Tolkien Jr',
-    age: 50,
-    id: '2'
-},
-{
-    name: 'JJ Tolkien Sr',
-    age: 80,
-    id: '3'
-}
+        name: 'JJ Tolkien',
+        age: 70,
+        id: '1'
+    },
+    {
+        name: 'JJ Tolkien Jr',
+        age: 50,
+        id: '2'
+    },
+    {
+        name: 'JJ Tolkien Sr',
+        age: 80,
+        id: '3'
+    }
 ]
 
 const graphql = require("graphql")
@@ -91,6 +91,19 @@ const RootQuery = new GraphQLObjectType({
                 })
             }
 
+        },
+        author: {
+            type: AuthorType,
+            args: {
+                id: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return _.find(authors, {
+                    id: args.id
+                })
+            }
         }
     }
 })
