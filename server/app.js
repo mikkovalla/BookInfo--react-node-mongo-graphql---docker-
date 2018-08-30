@@ -7,7 +7,7 @@ const cors = require('cors')
 const app = express()
 
 //allow cors
-app.use(cors)
+app.use(cors())
 
 mongoose.connect('mongodb://mikko:testi123@ds125392.mlab.com:25392/mikko_bookinfo_db', { useNewUrlParser: true })
 mongoose.connection.once('open', () => {
