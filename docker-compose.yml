@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  bookinfo--react-node-mongo-graphql---docker-:
+    image: bookinfo--react-node-mongo-graphql---docker-
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4000:4000
